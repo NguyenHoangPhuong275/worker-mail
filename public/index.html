@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#0e1411">
+<meta name="description" content="Tạo địa chỉ email tạm, sao chép và đọc thư ngay trên một trang."><title>Worker Mail — Hộp thư tạm</title>
+<link rel="stylesheet" href="/assets/app.css?v=domains-6"><script type="module" src="/assets/app.js?v=copy-7"></script>
+</head>
+<body>
+<svg class="icon-definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+<symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></symbol>
+<symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></symbol>
+<symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 7v5h-5M4 17v-5h5M6 6a8 8 0 0 1 13 3M18 18a8 8 0 0 1-13-3"/></symbol>
+<symbol id="i-shuffle" viewBox="0 0 24 24"><path d="M3 6h3c5 0 7 12 12 12h3m-4-4 4 4-4 4M3 18h3c2 0 3-2 5-5m2-3c2-3 3-4 5-4h3m-4-4 4 4-4 4"/></symbol>
+<symbol id="i-edit" viewBox="0 0 24 24"><path d="m15 5 4 4M4 20l4-1L20 7a2.8 2.8 0 0 0-4-4L4 15z"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+<symbol id="i-back" viewBox="0 0 24 24"><path d="m11 5-7 7 7 7M4 12h16"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+<symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 7h16M4 17h16"/><circle cx="9" cy="7" r="3"/><circle cx="15" cy="17" r="3"/></symbol>
+</defs></svg>
+<a class="skip-link" href="#main">Đến hộp thư</a>
+<header class="site-header"><div class="header-inner">
+<a class="brand" href="/" aria-label="Worker Mail"><span class="brand-mark"><svg><use href="#i-mail"/></svg></span><span>worker<span class="brand-light">mail</span></span></a>
+<div class="header-actions"><button class="button button-quiet" id="connect-button" type="button"><svg><use href="#i-settings"/></svg><span>Kết nối</span></button></div>
+</div></header>
+<main id="main" class="workspace" tabindex="-1">
+<section class="address-section" aria-labelledby="page-title">
+<div class="intro"><span class="eyebrow">NHẬN THƯ TRÊN TRÌNH DUYỆT</span><h1 id="page-title">Email tạm của bạn</h1><p>Sao chép địa chỉ. Nhận và đọc thư ngay bên dưới.</p></div>
+<div class="address-card">
+<div class="address-label"><svg><use href="#i-mail"/></svg><span>Địa chỉ nhận thư</span><span class="address-domain" id="domain-label"></span></div>
+<div class="address-row"><output id="current-address" aria-live="polite">Đang tải địa chỉ…</output><button class="button button-primary" id="copy-address" type="button" disabled aria-label="Sao chép địa chỉ"><svg><use href="#i-copy"/></svg><span>Sao chép</span></button></div>
+</div>
+<div class="address-actions"><button class="button button-secondary" id="new-address" type="button" disabled><svg><use href="#i-shuffle"/></svg>Địa chỉ mới</button><button class="button button-secondary" id="change-address" type="button" disabled><svg><use href="#i-edit"/></svg>Đổi địa chỉ</button><button class="button button-secondary" id="refresh-inbox" type="button"><svg><use href="#i-refresh"/></svg>Làm mới</button></div>
+<p class="retention-note"><svg><use href="#i-clock"/></svg><span id="retention-label">Thư được giữ lại, không tự xóa.</span></p>
+</section>
+<section class="inbox" aria-labelledby="inbox-title">
+<div class="inbox-header"><div class="inbox-heading"><svg><use href="#i-mail"/></svg><h2 id="inbox-title">Hộp thư đến</h2><span class="message-count" id="message-count">0</span></div><span class="connection-status" id="connection-status"><i></i><span id="status-text">Chưa kết nối</span></span></div>
+<div id="list-view">
+<div class="list-columns" aria-hidden="true"><span>Người gửi</span><span>Tiêu đề</span><span>Nhận lúc</span><span></span></div>
+<ul id="message-list" class="message-list" aria-label="Thư đã nhận"></ul>
+<div class="empty-state" id="empty-state">
+<svg class="empty-illustration" viewBox="0 0 160 120" fill="none" aria-hidden="true"><path d="M29 84h102l-12 23H41z" fill="#202e25"/><rect x="49" y="19" width="64" height="71" rx="7" fill="#1d2a21" stroke="#4c6b57" stroke-width="2"/><path d="M63 37h35M63 47h27M63 57h31" stroke="#4c6b57" stroke-width="3" stroke-linecap="round"/><path d="m29 68 15-22h6v28h63V46h7l11 22v25a8 8 0 0 1-8 8H37a8 8 0 0 1-8-8z" fill="#233d2c" stroke="#739e82" stroke-width="2"/><path d="M29 73h33l6 11h25l6-11h32" stroke="#739e82" stroke-width="2"/><circle cx="128" cy="25" r="12" fill="#75d59f"/><path d="M128 19v12m-6-6h12" stroke="#142d1d" stroke-width="2" stroke-linecap="round"/></svg>
+<h3 id="empty-title">Đang tải hộp thư…</h3><p id="empty-description">Thư gửi đến địa chỉ trên sẽ xuất hiện tại đây.</p><span class="waiting-label"><span class="waiting-dots"><i></i><i></i><i></i></span>Đang chờ email mới</span>
+</div></div>
+<article id="reader-view" class="reader" hidden>
+
+<h2 id="reader-subject"></h2><div class="reader-meta"><span class="sender-avatar" id="sender-avatar"></span><div><strong id="reader-from"></strong><span id="reader-to"></span></div><time id="reader-time"></time></div>
+<div class="otp-box" id="otp-box" hidden><div><span id="otp-label">Mã xác thực (OTP)</span><code id="otp-value"></code><small id="otp-context"></small></div><button class="button button-secondary" id="copy-otp" type="button" disabled><svg><use href="#i-copy"/></svg>Sao chép mã</button></div>
+<p class="otp-notice" id="otp-notice" role="status" hidden></p>
+<div class="message-body" id="reader-body"></div><div class="attachments" id="reader-attachments" hidden></div><div class="activation-links" id="activation-links" hidden><h3>Link trong thư</h3><ul id="reader-links"></ul></div>
+</article>
+<div class="inbox-footer"><span id="inbox-feedback" role="status" aria-live="polite">Đang kết nối hộp thư…</span><span>50 thư gần nhất</span></div>
+</section>
+<div class="usage-note"><span>Một địa chỉ cho việc bạn cần.</span><p>Tạo địa chỉ, sao chép và quay lại đây để xem email.</p></div>
+</main>
+<footer class="site-footer"><span>© 2026 Worker Mail</span></footer>
+<dialog id="address-dialog" aria-labelledby="address-dialog-title"><form id="address-form"><div class="dialog-heading"><h2 id="address-dialog-title">Đổi địa chỉ email</h2><button class="close-button" type="button" data-close aria-label="Đóng">×</button></div><p>Chọn tên và domain để mở hộp thư.</p><label for="localpart-input">Tên địa chỉ</label><input id="localpart-input" autocomplete="off" maxlength="32" placeholder="Ví dụ: hello" required><label for="domain-select">Domain</label><select id="domain-select"></select><p class="form-error" id="address-error" hidden></p><button class="button button-primary dialog-submit" type="submit">Dùng địa chỉ này<svg><use href="#i-arrow"/></svg></button></form></dialog>
+<dialog id="connect-dialog" aria-labelledby="connect-dialog-title"><form id="connect-form"><div class="dialog-heading"><h2 id="connect-dialog-title">Kết nối hộp thư</h2><button class="close-button" type="button" data-close aria-label="Đóng">×</button></div><p>Nhập mã truy cập để nhận và đọc email của bạn.</p><label for="token-input">Mã truy cập</label><input id="token-input" type="password" autocomplete="current-password" required><p class="form-error" id="connect-error" hidden></p><button class="button button-primary dialog-submit" type="submit" id="connect-submit">Kết nối</button><button class="button button-quiet disconnect-button" id="disconnect-button" type="button">Ngắt kết nối trong tab này</button></form></dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body></html>

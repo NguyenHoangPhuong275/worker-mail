@@ -1,0 +1,27 @@
+{
+  "name": "worker-mail",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "deploy": "wrangler deploy",
+    "check": "tsc --noEmit",
+    "test": "node --test tests/*.test.mjs",
+    "vendor:sync": "node scripts/sync-vendor.mjs",
+    "test:mail": "python tests/mailbox-e2e.py",
+    "test:live": "node tests/realtime-e2e.mjs",
+    "types": "wrangler types"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20261107.1",
+    "esbuild": "^0.28.2",
+    "jsdom": "^31.0.0",
+    "typescript": "^5.9.3",
+    "wrangler": "^4.45.0",
+    "ws": "^8.22.1"
+  },
+  "dependencies": {
+    "dompurify": "^3.4.17",
+    "postal-mime": "^4.2.0"
+  }
+}
