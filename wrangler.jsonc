@@ -4,11 +4,22 @@
   "main": "src/index.ts",
   "compatibility_date": "2026-11-07",
   "addresses": [
+    "*@aquachina.click",
+    "*@aula-trumveo3mn.io.vn",
     "*@banker-thaovy3.tokyo",
+    "*@beninultra-veoultra.io.vn",
+    "*@choxin-10k.click",
+    "*@conthotrangmauden62.io.vn",
     "*@cybersafe.tokyo",
     "*@hominhquan71.tokyo",
     "*@kenjaku.online",
+    "*@orange-cat.click",
+    "*@teaplus-damvitrahoachat.io.vn",
+    "*@thaovy-player963.io.vn",
     "*@thaovy-veo3hub.tokyo",
+    "*@tieutam.click",
+    "*@trada-venduong.click",
+    "*@tutukiki-ultraveo.io.vn",
     "*@vdmov1.tokyo",
     "*@vywife71.tokyo"
   ],
@@ -38,6 +49,6 @@
   "vars": {
     "APP_ENV": "production",
     "MAIL_RETENTION_SECONDS": "0",
-    "MAIL_DOMAINS": "banker-thaovy3.tokyo,cybersafe.tokyo,hominhquan71.tokyo,kenjaku.online,thaovy-veo3hub.tokyo,vdmov1.tokyo,vywife71.tokyo"
+    "MAIL_DOMAINS": "banker-thaovy3.tokyo,cybersafe.tokyo,hominhquan71.tokyo,kenjaku.online,thaovy-veo3hub.tokyo,vdmov1.tokyo,vywife71.tokyo,aquachina.click,choxin-10k.click,orange-cat.click,tieutam.click,trada-venduong.click,aula-trumveo3mn.io.vn,beninultra-veoultra.io.vn,conthotrangmauden62.io.vn,teaplus-damvitrahoachat.io.vn,thaovy-player963.io.vn,tutukiki-ultraveo.io.vn"
   }
 }
